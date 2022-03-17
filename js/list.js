@@ -200,7 +200,6 @@ var vm = new Vue({
       removeTodo(todo.id, todo.title, todo.text);
     },
     editTodo: function (item) {
-      //   console.log(item);
       this.cacheTodo = item;
       this.cacheTitle = item.title;
       this.cacheText = item.text;
