@@ -1,0 +1,158 @@
+body {
+  background: #1d1d1d;
+  // position: relative;
+}
+// * {
+//   outline: 1px blue solid;
+// }
+
+#todotitle {
+  padding-top: 30px;
+  line-height: 6.5rem;
+  font-size: 6vmax;
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  div {
+    margin: 0 7px;
+  }
+}
+#example1 {
+  height: 1px;
+  background-color: #1d1d1d;
+}
+#todoHr {
+  padding-top: 35px;
+  padding-left: 50px;
+  padding-right: 30px;
+}
+#todotext {
+  margin-top: 40px;
+  width: 100%;
+  // height: 150px;
+  padding: 0 50px;
+  overflow: auto;
+  #todotext2 {
+    position: relative;
+    padding: 30px 30px;
+    width: 100%;
+    height: 100%;
+    background-color: #2a2a2a;
+    border-radius: 50px;
+    margin: 0 auto;
+    overflow: auto;
+    input,
+    textarea {
+      background-color: #2a2a2a;
+      border: rgb(87, 85, 85) 1px solid;
+      width: 90%;
+    }
+    textarea {
+      margin-top: 32px;
+    }
+    h5,
+    input {
+      word-wrap: break-word;
+      font-size: 30px;
+      color: #fff;
+    }
+    p,
+    textarea {
+      word-wrap: break-word;
+      font-size: 20px;
+      color: #fff;
+    }
+    #btn02 {
+      position: absolute;
+      top: 4vw;
+      left: 87vw;
+      width: 40px;
+      height: 40px;
+      background-color: #2a2a2a;
+      border-radius: 10px;
+      border: none;
+      color: rgb(182, 182, 182);
+      font-size: 20px;
+    }
+    #btn01 {
+      position: absolute;
+      top: 4vw;
+      left: 85vw;
+      width: 40px;
+      height: 40px;
+      background-color: #2a2a2a;
+      border-radius: 10px;
+      border: none;
+      color: rgb(182, 182, 182);
+      font-size: 20px;
+    }
+  }
+}
+#addtodo {
+  position: fixed;
+  top: 41vw;
+  left: 94vw;
+  button {
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    font-size: 43px;
+  }
+}
+
+.modal-body {
+  input {
+    height: 40px;
+    width: 100%;
+    background-color: #2b2b2b;
+    color: white;
+    border: none;
+    outline: none;
+  }
+  textarea {
+    margin-top: 20px;
+    height: 250px;
+    width: 100%;
+    background-color: #2b2b2b;
+    color: white;
+    border: none;
+    outline: none;
+  }
+}
+.modal-content {
+  background-color: #1d1d1d;
+}
+.modal-title {
+  color: white;
+}
+#modalBtn {
+  text-align: end;
+  button {
+    margin-top: 8px;
+    margin-right: 8px;
+  }
+}
+#staticBackdropLabel {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-size: 20px;
+}
+#goANDleaveBtn {
+  margin-bottom: 8px;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+  button {
+    border: none;
+    background-color: rgb(60, 61, 61);
+    color: rgb(204, 204, 204);
+    font-weight: bold;
+    height: 40px;
+    width: 50%;
+  }
+}
