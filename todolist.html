@@ -58,21 +58,21 @@
       <div id="todotext" v-for="item in todos">
         <div id="todotext2">
           <h5 v-if="item.id !== cacheTodo.id">{{ item.title }}</h5>
-          <!-- <input
+          <input
             type="text"
             v-model="cacheTitle"
             @keyup.esc="cancelEdit()"
             @keyup.enter="doneEdit(item)"
             v-if="item.id == cacheTodo.id"
-          /> -->
+          />
           <br />
           <p v-if="item.id !== cacheTodo.id">{{ item.text }}</p>
-          <!-- <textarea
+          <textarea
             type="text"
             v-model="cacheText"
             @keyup.esc="cancelEdit()"
             v-if="item.id == cacheTodo.id"
-          ></textarea> -->
+          ></textarea>
           <button id="btn01" @click="editTodo(item)">
             <i class="edit icon"></i>
           </button>

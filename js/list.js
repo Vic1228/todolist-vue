@@ -114,22 +114,65 @@ $(".d8 , .d8A")
     $(".d8 , .d8A").css("color", "#fff");
   });
 
+var test = [];
+
+var Localdata = localStorage.getItem("todoList")
+  ? JSON.parse(localStorage.getItem("todoList"))
+  : {
+      id: [],
+      title: [],
+      text: [],
+    };
+
+function reflashTodos(Title, Text, Id) {
+  if (Id != null) {
+    Localdata.id.push(Id);
+    Localdata.title.push(Title);
+    Localdata.text.push(Text);
+    localStorage.setItem("todoList", JSON.stringify(Localdata));
+  }
+  if (JSON.parse(localStorage.getItem("todoList")) != null) {
+    for (
+      i = 0;
+      i < JSON.parse(localStorage.getItem("todoList")).id.length;
+      i++
+    ) {
+      test[i] = {
+        id: JSON.parse(localStorage.getItem("todoList")).id[i],
+        title: JSON.parse(localStorage.getItem("todoList")).title[i],
+        text: JSON.parse(localStorage.getItem("todoList")).text[i],
+        completed: true,
+      };
+    }
+  }
+}
+
+function removeTodo(Id, title, text) {
+  Localdata.id.splice(Localdata.id.indexOf(Id), 1);
+  Localdata.title.splice(Localdata.title.indexOf(title), 1);
+  Localdata.text.splice(Localdata.text.indexOf(text), 1);
+  localStorage.setItem("todoList", JSON.stringify(Localdata));
+}
+
+function editTodo(title, text, newTitle, newText) {
+  Localdata.title.splice(Localdata.title.indexOf(title), 1, newTitle);
+  Localdata.text.splice(Localdata.text.indexOf(text), 1, newText);
+  localStorage.setItem("todoList", JSON.stringify(Localdata));
+}
+
+reflashTodos();
+
 var vm = new Vue({
   el: "#app",
   data: {
     newTitle: "標題",
     newText: "內文",
-    todos: [
-      {
-        id: "123",
-        title: "標題",
-        text: "內文",
-        completed: true,
-      },
-    ],
+    todos: test,
     cacheTodo: {},
     cacheTitle: "",
     cacheText: "",
+    oldTitle: "",
+    oldText: "",
   },
 
   methods: {
@@ -140,53 +183,41 @@ var vm = new Vue({
       if (!valueTitle) {
         return;
       }
-      //
-      const data = localStorage.getItem("todoList")
-        ? JSON.parse(localStorage.getItem("todoList"))
-        : {
-            id: [],
-            title: [],
-            text: [],
-          };
-      data.id.push(valueId);
-      data.title.push(valueTitle);
-      data.text.push(valueText);
-      localStorage.setItem("todoList", JSON.stringify(data));
-      //
-      this.todos.push({
-        id: valueId,
-        title: valueTitle,
-        text: valueText,
-        completed: false,
-      });
+      reflashTodos(valueTitle, valueText, valueId);
       this.newTitle = "標題";
       this.newText = "內文";
     },
-    // removeTodo: function (todo) {
-    //   var newIndex = "";
-    //   var vm = this;
-    //   vm.todos.forEach(function (item, key) {
-    //     if (todo.id === item.id) {
-    //       newIndex = key;
-    //     }
-    //   });
-    //   this.todos.splice(newIndex, 1);
-    // },
-    // editTodo: function (item) {
-    //   console.log(item);
-    //   this.cacheTodo = item;
-    //   this.cacheTitle = item.title;
-    //   this.cacheText = item.text;
-    // },
-    // cancelEdit: function () {
-    //   this.cacheTodo = {};
-    // },
-    // doneEdit: function (item) {
-    //   item.title = this.cacheTitle;
-    //   item.text = this.cacheText;
-    //   this.cacheTitle = "";
-    //   this.cacheText = "";
-    //   this.cacheTodo = {};
-    // },
+    removeTodo: function (todo) {
+      var newIndex = "";
+      var vm = this;
+
+      vm.todos.forEach(function (item, key) {
+        if (todo.id === item.id) {
+          newIndex = key;
+        }
+      });
+      this.todos.splice(newIndex, 1);
+      removeTodo(todo.id, todo.title, todo.text);
+    },
+    editTodo: function (item) {
+      //   console.log(item);
+      this.cacheTodo = item;
+      this.cacheTitle = item.title;
+      this.cacheText = item.text;
+      oldTitle = this.cacheTitle;
+      oldText = this.cacheText;
+    },
+    cancelEdit: function () {
+      this.cacheTodo = {};
+    },
+    doneEdit: function (item) {
+      item.title = this.cacheTitle;
+      item.text = this.cacheText;
+      this.cacheTitle = "";
+      this.cacheText = "";
+      this.cacheTodo = {};
+      console.log(oldTitle);
+      editTodo(oldTitle, oldText, item.title, item.text);
+    },
   },
 });
